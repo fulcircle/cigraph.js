@@ -1,0 +1,110 @@
+﻿html, body 
+{
+    overflow:hidden;
+}
+
+@font-face
+{
+    font-family: ciGraphBold;
+    src: url('Fonts/Sansation_Bold.ttf');
+    font-weight:bold;
+}
+@font-face
+{
+    font-family: ciGraph;
+    src: url('Fonts/Sansation_Regular.ttf');
+}
+@font-face
+{
+    font-family: ciGraphItalics;
+    src: url('Fonts/Sansation_Italic.ttf');
+}
+
+.link {
+        fill: none;
+        stroke: #ccc;
+        stroke-width: 1.2px;
+}
+circle {
+    opacity: .85;
+}
+
+.running, .runningButFailed {
+    fill: #42A2BD;
+}
+
+.succeeded {
+    fill: #83b63a;
+}
+
+.failed {
+    fill: #F76929;
+}
+
+.inactive {
+    fill: #ccc;
+}
+.nodeText {
+    font-size: 14px;
+    fill: black;
+
+}
+
+.infoBox, .infoBox_running, .infoBox_succeeded, .infoBox_failed, .infoBox_runningButFailed, .infoBox_inactive {
+    color: white;
+    opacity: 0.8;
+    border-radius: 15px;
+    border-top-left-radius: 0px;
+    padding: 8px 10px 10px 8px;
+    position:fixed;
+    font-family: ciGraph;
+    font-size:12px;
+    left: 0px;
+    top: 0px;
+}
+
+.infoBox_running {
+    background-color: #42A2BD;
+}
+
+.infoBox_succeeded {
+    background-color: #83b63a;
+}
+
+.infoBox_failed {
+    background-color: #F76929;
+}
+
+.infoBox_runningButFailed {
+    background-color: #F76929;
+}
+
+.infoBox_inactive {
+    background-color: #ccc;
+}
+
+.arcRunning {
+    fill:#83b63a; 
+}
+
+.arcRunningButFailed {
+    fill: #F76929;
+}
+
+.progressbar-container { 
+    height: 3px; 
+    width: 100px;
+    position: relative;
+    border: 1px white solid;
+}
+
+.progressbar {
+    width: 50%;
+    height: 100%;
+    background-color: white;
+    position: relative;
+}
+
+.info-spacer {
+    padding-top:3px;
+}

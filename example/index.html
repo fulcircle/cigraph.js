@@ -1,0 +1,196 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <title>CI Graph Example</title>
+
+    <link href="Styles/cigraph.css" rel="stylesheet" type="text/css" />
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+    <!-- Add fancyBox main JS and CSS files for popup logs -->
+    <script type="text/javascript" src="Scripts/LightBox/source/jquery.fancybox.js?v=2.1.4"></script>
+    <link rel="stylesheet" type="text/css" href="Scripts/LightBox/source/jquery.fancybox.css?v=2.1.4" media="screen" />
+
+    <script src="Scripts/d3.v3.min.js"></script> 
+    <script src="Scripts/cigraph.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            var nodeData =
+                [
+                   {
+                      "BuildTypeId":"bt306",
+                      "DependencyIds":[
+
+                      ],
+                      "Failed":false,
+                      "FailedButStillRunning":false,
+                      "FailedDependency":false,
+                      "Inactive":false,
+                      "LogUrl":"buildoutput.txt",
+                      "Name":"Check for new commits",
+                      "PercentageCompleted":null,
+                      "Running":false,
+                      "StatusText":"Success",
+                      "Succeeded":true,
+                   },
+                   {
+                      "BuildTypeId":"bt308",
+                      "DependencyIds":[
+                         "bt306"
+                      ],
+                      "Failed":false,
+                      "FailedButStillRunning":false,
+                      "FailedDependency":false,
+                      "Inactive":false,
+                      "LogUrl":"buildoutput.txt",
+                      "Name":"Run Pre-build Scripts",
+                      "PercentageCompleted":null,
+                      "Running":false,
+                      "StatusText":"Success",
+                      "Succeeded":true
+                   },
+                   {
+                      "BuildTypeId":"bt391",
+                      "DependencyIds":[
+                         "bt308"
+                      ],
+                      "Failed":false,
+                      "FailedButStillRunning":false,
+                      "FailedDependency":false,
+                      "Inactive":false,
+                      "LogUrl":"buildoutput.txt",
+                      "Name":"Build Codebase",
+                      "PercentageCompleted":null,
+                      "Running":false,
+                      "StatusText":"Success",
+                      "Succeeded":true
+                   },
+                   {
+                      "BuildTypeId":"bt303",
+                      "DependencyIds":[
+                         "bt306"
+                      ],
+                      "Failed":false,
+                      "FailedButStillRunning":false,
+                      "FailedDependency":false,
+                      "Inactive":false,
+                      "LogUrl":"buildoutput.txt",
+                      "Name":"Build Dependencies",
+                      "PercentageCompleted":null,
+                      "Running":false,
+                      "StatusText":"Success",
+                      "Succeeded":true
+                   },
+                   {
+                      "BuildTypeId":"bt309",
+                      "DependencyIds":[
+                         "bt391"
+                      ],
+                      "Failed":false,
+                      "FailedButStillRunning":false,
+                      "FailedDependency":false,
+                      "Inactive":false,
+                      "LogUrl":"buildoutput.txt",
+                      "Name":"Deploy Binaries",
+                      "PercentageCompleted":null,
+                      "Running":false,
+                      "StatusText":"Success",
+                      "Succeeded":true
+                   },
+                   {
+                      "BuildTypeId":"bt444",
+                      "DependencyIds":[
+                         "bt306",
+                         "bt391"
+                      ],
+                      "Failed":false,
+                      "FailedButStillRunning":false,
+                      "FailedDependency":false,
+                      "Inactive":false,
+                      "LogUrl":"buildoutput.txt",
+                      "Name":"Integration Tests",
+                      "PercentageCompleted":50,
+                      "Running":true,
+                      "StatusText":"Tests passed: 900/1826, ignored: 9",
+                      "Succeeded":false
+                   },
+                   {
+                      "BuildTypeId":"bt13",
+                      "DependencyIds":[
+                         "bt309",
+                         "bt733"
+                      ],
+                      "Failed":false,
+                      "FailedButStillRunning":true,
+                      "FailedDependency":false,
+                      "Inactive":false,
+                      "LogUrl":"buildoutput.txt",
+                      "Name":"Selenium Tests",
+                      "PercentageCompleted":75,
+                      "Running":false,
+                      "StatusText":"Tests failed: 2, Tests passed: 979",
+                      "Succeeded":false
+                   },
+                   {
+                      "BuildTypeId":"bt541",
+                      "DependencyIds":[
+                         "bt309"
+                      ],
+                      "Failed":false,
+                      "FailedButStillRunning":false,
+                      "FailedDependency":false,
+                      "Inactive":false,
+                      "LogUrl":"buildoutput.txt",
+                      "Name":"Javascript Tests",
+                      "PercentageCompleted":null,
+                      "Running":false,
+                      "StatusText":"Tests passed: 222",
+                      "Succeeded":true
+                   },
+                   {
+                      "BuildTypeId":"bt16",
+                      "DependencyIds":[
+                         "bt306"
+                      ],
+                      "Failed":true,
+                      "FailedButStillRunning":false,
+                      "FailedDependency":false,
+                      "Inactive":false,
+                      "LogUrl":"buildoutput.txt",
+                      "Name":"StyleSheriff",
+                      "PercentageCompleted":null,
+                      "Running":false,
+                      "StatusText":"Warning limit of 200 exceeded (208 warnings)",
+                      "Succeeded":false
+                   },
+                   {
+                      "BuildTypeId":"bt311",
+                      "DependencyIds":[
+                         "bt13"
+                      ],
+                      "Failed":true,
+                      "FailedButStillRunning":false,
+                      "FailedDependency":false,
+                      "Inactive":true,
+                      "LogUrl":"buildoutput.txt",
+                      "Name":"Run Post-Test Tasks",
+                      "PercentageCompleted":null,
+                      "Running":false,
+                      "StatusText":"Snapshot dependency failed: 2 - Automated Tests against the latest build :: 3 Run Selenium Tests (new)",
+                      "Succeeded":false
+                   }
+                ]
+            
+            var graph = new CiGraph(nodeData,
+                                    "bt306",
+                                    {
+                                      width: $(window).width()-10,
+                                      height: $(window).height(),
+                                    }
+                 )
+            graph.init();
+        })
+
+
+    </script>
+</body>
+</html>
