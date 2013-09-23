@@ -29,7 +29,13 @@ graph.init();
 graph.update(updatedNodeData);
 ```
 
-Please see the index.html in the 'example' directory to see how nodeData must be provided.  It is JSON formatted data that specifies information about the steps in the CI pipeline.  The second argument specifies the root node ID in the nodeData representing the CI pipeline (the first step that will run when a CI run starts).
+Please see the index.html in the 'example' directory to see how nodeData must be provided.  It is JSON formatted data that specifies information about the steps in the CI pipeline.  Each node represents one step in the CI pipeline.  The second argument specifies the 'root' node's ID in the nodeData representing the CI pipeline (the first step that will run when a CI run starts).
 
 Obviously, we want to update the graph at regular intervals, so we call graph.update(updatedNodeData) with updated data about the state of CI.
+
+You can also specify a 'LogUrl' property for each in the nodeData JSON.  If a node has LogUrl specified, and the node is clicked on in the graph, a fancybox window will pop-up, navigated to the url specified in LogUrl for that node.  You can also see this in action in the example.
+
+![Picture of LogUrl popup](https://raw.github.com/fulcircle/cigraph.js/master/images/example_image2.PNG)
+
+
 
