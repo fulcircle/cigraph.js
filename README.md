@@ -3,7 +3,7 @@ cigraph.js
 
 Graph visualization for complex continuous integration pipelines
 
-cigraph.js provides a 'bird's eye view' of a continuous integration (CI) pipeline.  In complex build environments, developers are unaware of how the build environment is setup and what to look for when CI fails at any stage.  Though it is not the developer's job to understand thoroughly how CI operates, developers should know immediately when and where CI fails.  Consequently, rapid feedback and fixes are facilitated.  To this end, cigraph.js provides a graphic tree view of a CI environment and generates visual cues when any stage of CI is running, failed or succeeded.
+cigraph.js provides a 'bird's eye view' of a continuous integration (CI) pipeline.  In complex build environments, developers are unaware of how the build environment is setup and what to look for when CI fails at any stage.  Though it is not the developer's job to understand thoroughly how CI operates, developers should know immediately when and where CI fails.  Consequently, rapid feedback and fixes are facilitated.  To this end, cigraph.js provides a graphic tree view of a CI environment and generates visual cues when any stage of CI is running, failed or passed.
 
 ![Picture of cigraph.js in action](https://raw.github.com/fulcircle/cigraph.js/master/images/example_image.PNG)
 
