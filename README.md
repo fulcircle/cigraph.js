@@ -21,7 +21,7 @@ var graph = new CiGraph(nodeData,
                         {
                           width: $(window).width(),
                           height: $(window).height(),
-                        }
+                        })
 graph.init();
 
 /* After some time */
