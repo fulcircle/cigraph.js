@@ -1,8 +1,12 @@
+/*
+Parameters:
+nodeData -> See the index.html in the example directory for the structure of 'nodeData'
+rootNodeId -> The root of the CI dependency chain
+settings -> object that stores desired settings.  Required settings are 'width' and 'height'
+*/
 function CiGraph(nodeData, rootNodeId, settings) {
 
-    // Required settings:
-    // width
-    // height
+    // Default settings
 
     // css selector inside which the graph wil be drawn
     settings.container = settings.container || "body";
@@ -74,6 +78,8 @@ function CiGraph(nodeData, rootNodeId, settings) {
             return dependentNodes;
         }
 
+    // Breadth-first traversal of the node dependency chain.
+    // Used to assign children to each node to render graph.
     BuildGraph.prototype.buildNodes = 
             function() {
                 var graph = this;
@@ -500,6 +506,7 @@ function CiGraph(nodeData, rootNodeId, settings) {
         }
 
 
+    // Animator it used by the Tree class to get and set animations on svg elements in the graphical tree
     function Animator() {
         this.runningAnimations = {}
     }
